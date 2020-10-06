@@ -1,3 +1,33 @@
-@Library('mhr-share-library@test') _
-log.info 'MEDIKONDA'
-log.warning 'Very good boy!'
+pipeline{
+   agent any
+  stages{
+    stage('compile stage') {
+      steps {
+        withMaven(maven : 'maven'){
+          
+         sh 'mvn clean compile'
+        }
+      }
+          }
+    
+    stage('testing stage') {
+      steps {
+        withMaven(maven : 'maven'){
+          
+         sh 'mvn test'
+        }
+      }
+          }
+    
+    stage('Deployment stage') {
+      steps {
+        withMaven(maven : 'maven'){
+          
+         sh 'mvn deploy'
+        }
+      }
+          }
+    
+  }
+
+}
