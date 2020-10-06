@@ -3,14 +3,13 @@ pipeline{
   stages{
     stage('compile stage') {
       steps {
-        withMaven(maven : 'M2_HOME'){
-          
-         sh 'mvn clean compile'
+         def mvnHome = tool name: 'M2_HOME', type: 'maven'
+         sh "${mvnHome}/bin/mvn  clean compile"
         }
       }
-          }
+     }
     
-    stage('testing stage') {
+    /*stage('testing stage') {
       steps {
         withMaven(maven : 'M2_HOME'){
           
@@ -30,4 +29,4 @@ pipeline{
     
   }
 
-}
+}*/
